@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<a href="/new" id="new">Create New Set</a>
+
+<ol id="sets">
+    {% for item in sets %}
+    <li>
+        <a href="/set/{{ item.key().id() }}">
+            <h2>{{ item.title }}</h2>
+            <span>{{ item.content }}</span>
+        </a>
+    </li>
+    {% endfor %}
+</ol>
+
+<p id="footer"><a href="{{ logout }}">Logout?</a></p>
+
+{% endblock %}

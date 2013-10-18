@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+                {% if action == "new" %}Create New Set
+                {% else %}Editing: {{ title }}{% endif %}
+{% endblock %}
+
+{% block body %}
+
+<form id="edit" action="/{{ action }}" method="post">
+
+    {% if error %}
+        <div id="error">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    <label for="title">Title (optional)</label>
+    <input name="title" id="title" type="text" {%- if title -%}value="{{ title }}"{% endif %}>
+
+    <label for="content">
+            <p>Separate the front and back of each card with a colon.
+            Separate cards with a new line.</p>
+            <p>Front: back </p>
+            <p>Another front: another back</p>
+    </label>
+
+    <textarea name="content" id="content" rows="{{ rows|default("6") }}">
+        {{- content -}}
+    </textarea>
+
+    <input type="submit" value="{%- if creator -%}Submit
+                                {%- elif action == "new" -%}Create
+                                {%- else -%}Copy{%- endif -%}">
+</form>
+
+{% endblock %}

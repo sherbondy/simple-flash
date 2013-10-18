@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block manifest %}manifest="/cache.manifest"{% endblock %}
+
+{% if title %}
+    {% block title %}{{ title }}{% endblock %}
+{% endif %}
+
+{% block body %}
+<div id="top">
+    <a href="/edit/{{ id }}">{%- if creator -%}Edit
+                             {%- elif logged_in -%}Copy{% endif %}</a>
+</div>
+
+<div id="cards">
+    <a id="remove" href="#">X</a>
+
+    <dl>
+        {% for front, back in cards %}
+            <dt id="f{{ loop.index }}">{{ front }}</dt>
+            <dd id="b{{ loop.index }}">{{ back }}</dd>
+        {% else %}
+            <dt>No cards.</dt>
+            <dd>Why not add some?</dd>
+        {% endfor %}
+    </dl>
+</div>
+
+<div id="bottom">
+    <a id="prev" href="#">Previous</a>
+    <a id="shuffle">
+        <span id="current">1</span>/<span id="total">{{ cards|length }}</span>
+    </a>
+    <a id="next" href="#">Next</a>
+</div>
+{% endblock %}
