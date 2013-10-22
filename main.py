@@ -2,9 +2,8 @@ import os.path, cgi
 from types import *
 from datetime import datetime
 
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import util
 from google.appengine.api import users
+import webapp2
 
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 from models import CardSets
@@ -22,13 +21,15 @@ def verifySet(content):
     return cards
 
 
-class BasePage(webapp.RequestHandler):
-    def __init__(self):
-        self.user = users.get_current_user()
+class BasePage(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
 
     def render(self, template_name, **kwargs):
         logged_in = False
-        if self.user:
+
+        user = users.get_current_user()
+        if user:
             logged_in = True
 
         values = {"logged_in": logged_in,
@@ -46,11 +47,13 @@ class BasePage(webapp.RequestHandler):
 
 class ListSets(BasePage):
     def get(self):
-        if not self.user:
+        user = users.get_current_user()
+
+        if not user:
             self.redirect(users.create_login_url("/"))
         else:
             q = CardSets.all()
-            q.filter('user = ', self.user)
+            q.filter('user = ', user)
             q.order("-modified")
             results = q.fetch(50)
             for item in results:
@@ -67,7 +70,9 @@ class ViewSet(BasePage):
 
         title = result.title
 
-        if self.user == result.user:
+        user = users.get_current_user()
+
+        if user == result.user:
             creator = True
 
         if result:
@@ -80,14 +85,18 @@ class ViewSet(BasePage):
 
 class NewSet(BasePage):
     def get(self):
-        if not self.user:
+        user = users.get_current_user()
+
+        if not user:
             self.redirect(users.create_login_url("/"))
         else:
             self.render("edit.html",
                         action="new")
 
     def post(self):
-        if not self.user:
+        user = users.get_current_user()
+
+        if not user:
             self.redirect(users.create_login_url("/"))
         else:
             title = cgi.escape(self.request.get("title"))
@@ -96,7 +105,7 @@ class NewSet(BasePage):
             output = verifySet(content)
 
             if type(output) is ListType:
-                result = CardSets(user=self.user,
+                result = CardSets(user=user,
                                   title=title,
                                   content=content)
                 result.put()
@@ -115,8 +124,10 @@ class EditSet(BasePage):
         result = CardSets.get_by_id(int(id))
 
         creator = False
-        if self.user and result:
-            if self.user == result.user:
+        user = users.get_current_user()
+
+        if user and result:
+            if user == result.user:
                 creator = True
 
             content = result.content
@@ -136,15 +147,17 @@ class EditSet(BasePage):
             self.redirect("/")
 
     def post(self, id):
-        if not self.user:
+        user = users.get_current_user()
+
+        if not user:
             self.redirect(users.create_login_url("/"))
         else:
             result = CardSets.get_by_id(int(id))
 
             creator = False
             # they're copying the set, not editing it
-            if not self.user == result.user:
-                result = CardSets(user=self.user)
+            if not user == result.user:
+                result = CardSets(user=user)
             else:
                 creator = True
 
@@ -178,15 +191,12 @@ class Manifest(BasePage):
         self.response.headers['Content-Type'] = "text/cache-manifest"
         self.render("cache.manifest")
 
-def main():
-  application = webapp.WSGIApplication([('/', ListSets),
+application = webapp2.WSGIApplication([('/', ListSets),
                                         ('/new', NewSet),
                                         ('/set/(\d+)', ViewSet),
                                         ('/edit/(\d+)', EditSet),
                                         ('/cache.manifest', Manifest)],
                                        debug=True)
-  util.run_wsgi_app(application)
-
 
 if __name__ == '__main__':
   main()

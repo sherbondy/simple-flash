@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # rev 1
-/static/script.js
+# /static/script.js
 /static/style.css
 http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 FALLBACK:
