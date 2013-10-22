@@ -22,9 +22,6 @@ def verifySet(content):
 
 
 class BasePage(webapp2.RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-
     def render(self, template_name, **kwargs):
         logged_in = False
 
@@ -194,8 +191,7 @@ class Manifest(BasePage):
 application = webapp2.WSGIApplication([('/', ListSets),
                                         ('/new', NewSet),
                                         ('/set/(\d+)', ViewSet),
-                                        ('/edit/(\d+)', EditSet),
-                                        ('/cache.manifest', Manifest)],
+                                        ('/edit/(\d+)', EditSet)],
                                        debug=True)
 
 if __name__ == '__main__':
