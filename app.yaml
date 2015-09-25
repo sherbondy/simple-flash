@@ -1,5 +1,5 @@
 application: simple-flash-hrd
-version: 2.1
+version: 3
 runtime: python27
 api_version: 1
 threadsafe: true
