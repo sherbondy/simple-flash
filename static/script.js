@@ -14,76 +14,76 @@
  * http://developer.apple.com/iphone/library/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html#//apple_ref/doc/uid/TP40006511-SW5
  */
 (function($) {
-	$.fn.swipe = function(options) {
-		// Default thresholds & swipe functions
-		var defaults = {
-			threshold: {
-				x: 30,
-				y: 10
-			},
-			swipeLeft: function() { alert('swiped left') },
-			swipeRight: function() { alert('swiped right') },
-			preventDefaultEvents: true
-		};
+  $.fn.swipe = function(options) {
+    // Default thresholds & swipe functions
+    var defaults = {
+      threshold: {
+        x: 30,
+        y: 10
+      },
+      swipeLeft: function() { alert('swiped left') },
+      swipeRight: function() { alert('swiped right') },
+      preventDefaultEvents: true
+    };
 
-		var options = $.extend(defaults, options);
+    var options = $.extend(defaults, options);
 
-		if (!this) return false;
+    if (!this) return false;
 
-		return this.each(function() {
+    return this.each(function() {
 
-			var me = $(this)
+      var me = $(this)
 
-			// Private variables for each element
-			var originalCoord = { x: 0, y: 0 }
-			var finalCoord = { x: 0, y: 0 }
+      // Private variables for each element
+      var originalCoord = { x: 0, y: 0 }
+      var finalCoord = { x: 0, y: 0 }
 
-			// Screen touched, store the original coordinate
-			function touchStart(event) {
-				console.log('Starting swipe gesture...')
-				originalCoord.x = event.targetTouches[0].pageX
-				originalCoord.y = event.targetTouches[0].pageY
-			}
+      // Screen touched, store the original coordinate
+      function touchStart(event) {
+        console.log('Starting swipe gesture...')
+        originalCoord.x = event.targetTouches[0].pageX
+        originalCoord.y = event.targetTouches[0].pageY
+      }
 
-			// Store coordinates as finger is swiping
-			function touchMove(event) {
-				if (defaults.preventDefaultEvents)
-				    event.preventDefault();
-				finalCoord.x = event.targetTouches[0].pageX // Updated X,Y coordinates
-				finalCoord.y = event.targetTouches[0].pageY
-			}
+      // Store coordinates as finger is swiping
+      function touchMove(event) {
+        if (defaults.preventDefaultEvents)
+            event.preventDefault();
+        finalCoord.x = event.targetTouches[0].pageX // Updated X,Y coordinates
+        finalCoord.y = event.targetTouches[0].pageY
+      }
 
-			// Done Swiping
-			// Swipe should only be on X axis, ignore if swipe on Y axis
-			// Calculate if the swipe was left or right
-			function touchEnd(event) {
-				console.log('Ending swipe gesture...')
-				var changeY = originalCoord.y - finalCoord.y
-				if(changeY < defaults.threshold.y && changeY > (defaults.threshold.y*-1)) {
-					changeX = originalCoord.x - finalCoord.x
+      // Done Swiping
+      // Swipe should only be on X axis, ignore if swipe on Y axis
+      // Calculate if the swipe was left or right
+      function touchEnd(event) {
+        console.log('Ending swipe gesture...')
+        var changeY = originalCoord.y - finalCoord.y
+        if(changeY < defaults.threshold.y && changeY > (defaults.threshold.y*-1)) {
+          changeX = originalCoord.x - finalCoord.x
 
-					if(changeX > defaults.threshold.x) {
-						defaults.swipeLeft()
-					}
-					if(changeX < (defaults.threshold.x*-1)) {
-						defaults.swipeRight()
-					}
-				}
-			}
+          if(changeX > defaults.threshold.x) {
+            defaults.swipeLeft()
+          }
+          if(changeX < (defaults.threshold.x*-1)) {
+            defaults.swipeRight()
+          }
+        }
+      }
 
-			// Swipe was canceled
-			function touchCancel(event) {
-				console.log('Canceling swipe gesture...')
-			}
+      // Swipe was canceled
+      function touchCancel(event) {
+        console.log('Canceling swipe gesture...')
+      }
 
-			// Add gestures to all swipable areas
-			this.addEventListener("touchstart", touchStart, false);
-			this.addEventListener("touchmove", touchMove, false);
-			this.addEventListener("touchend", touchEnd, false);
-			this.addEventListener("touchcancel", touchCancel, false);
+      // Add gestures to all swipable areas
+      this.addEventListener("touchstart", touchStart, false);
+      this.addEventListener("touchmove", touchMove, false);
+      this.addEventListener("touchend", touchEnd, false);
+      this.addEventListener("touchcancel", touchCancel, false);
 
-		});
-	};
+    });
+  };
 })(jQuery);
 
 // My stuff
@@ -104,13 +104,14 @@ function hide_address_bar() {
 }
 
 function reoriented() {
-    var is_portrait = (window.orientation == 0);
+    var is_portrait = (window.orientation == 0),
+        $body = $("body");
 
-    $("body").removeClass("portrait landscape");
+    $body.removeClass("portrait landscape");
     if (is_portrait) {
-        $("body").addClass("portrait");
+        $body.addClass("portrait");
     } else {
-        $("body").addClass("landscape");
+        $body.addClass("landscape");
     }
 
     setTimeout(hide_address_bar, 100);
@@ -142,31 +143,35 @@ function toHash() {
 */
 
 function swapCard(direction) {
-    if (moved == false || direction!=null) {
+    if (moved === false || direction !== null) {
         $("dd:visible").hide().prev("dt").show();
 
-        $("dt").hide();
-        if ($(this).is("#prev") || direction=="right") {
+        var $dt = $("dt"),
+            $self = $(event.target);
+
+        $dt.hide();
+        if ($self.is("#prev") || direction === "right") {
             // previous
-            if (index == 0) {
-                index = $("dt").length - 1;
+            if (index === 0) {
+                index = $dt.length - 1;
             } else {
-                index-=1;
+                index -= 1;
             }
-        } else if ($(this).is("#shuffle")) {
+        } else if ($self.is("#shuffle")) {
             // shuffle
-            index = Math.floor(Math.random()*$("dt").length);
+            index = Math.floor(Math.random() * $dt.length);
         } else {
             // next or delete
-            if (index == ($("dt").length - 1)) {
+            if (index === ($dt.length - 1)) {
                 index = 0;
             } else {
-                index+=1;
+                index += 1;
             }
         }
 
-        $("dt").eq(index).show();
-        $("#current").text(index+1);
+        $dt.eq(index).show();
+        $("#current").text($dt.length ? index + 1 : 0);
+
         // toHash();
         return false;
     }
@@ -175,10 +180,10 @@ function swapCard(direction) {
 $(function() {
     // setInterval(fromHash, 100);
 
-	if (idevice) {
-	    $("body").addClass("iphone");
+  if (idevice) {
+      $("body").addClass("iphone");
 
-    	reoriented();
+      reoriented();
         window.addEventListener('orientationchange', reoriented, false);
 
         if (standalone) {
@@ -214,11 +219,11 @@ $(function() {
         $("#next, #prev, #shuffle").bind(ivent, swapCard);
 
         $("#remove").bind(ivent, function() {
-            if (moved == false) {
+            if (moved === false) {
                 $("dt:visible").next("dd").remove();
                 $("dd:visible").prev("dt").remove();
                 $("dt:visible, dd:visible").remove();
-                index-=1;
+                index -= 1;
                 $("#total").text($("dt").length);
                 swapCard();
             }

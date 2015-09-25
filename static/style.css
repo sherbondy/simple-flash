@@ -1,6 +1,6 @@
 /* @override
-	http://localhost:8084/static/style.css
-	http://simple-flash.appspot.com/static/style.css
+  http://localhost:8084/static/style.css
+  http://simple-flash.appspot.com/static/style.css
 */
 
 * {
@@ -10,140 +10,140 @@
     font-family: 'Helvetica Neue', Helvetica;
     font-size: inherit;
     font-size: 100%;
-	text-decoration: none;
-	list-style: none;
-	-webkit-tap-highlight-color: transparent;
-	-webkit-text-size-adjust: none;
-	-webkit-appearance: none;
-	border: none;
+  text-decoration: none;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: none;
+  -webkit-appearance: none;
+  border: none;
 }
 :focus {
-	outline: none;
+  outline: none;
 }
 body {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	min-height: 416px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  min-height: 416px;
 }
 body.landscape {
-	min-height: 268px;
+  min-height: 268px;
 }
 body.portrait.standalone {
-	min-height: 460px;
+  min-height: 460px;
 }
 body.landscape.standalone {
-	min-height: 300px;
+  min-height: 300px;
 }
 
 #edit {
     font-size: 18px;
 }
 #edit label {
-	position: absolute;
-	display: block;
-	padding: 8px 5%;
-	color: #666;
-	display: none;
+  position: absolute;
+  display: block;
+  padding: 8px 5%;
+  color: #666;
+  display: none;
 }
 #edit label.focus {
-	color: #ccc;
+  color: #ccc;
 }
 #edit input[type=text], #edit textarea {
-	display: block;
-	width: 90%;
-	border: none;
-	border-bottom: 1px solid #ccc;
-	padding: 8px 5%;
+  display: block;
+  width: 90%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 5%;
 }
 #edit input[type=text].touch, #edit textarea.touch,
 #edit input[type=text]:hover, #edit textarea:hover {
-	background: #eee;
+  background: #eee;
 }
 #edit input[type=submit] {
-	display: block;
-	background: #897ed8;
-	color: #fff;
-	font-weight: bold;
-	width: 100%;
-	padding: 16px;
+  display: block;
+  background: #897ed8;
+  color: #fff;
+  font-weight: bold;
+  width: 100%;
+  padding: 16px;
 }
 #edit input[type=submit].touch, #edit input[type=submit]:hover {
-	background: #6e66b3;
+  background: #6e66b3;
 }
 
 #top {
-	z-index: 1;
-	text-align: right;
-	position: absolute;
-	width: 100%;
-	padding: 8px 0;
+  z-index: 1;
+  text-align: right;
+  position: absolute;
+  width: 100%;
+  padding: 8px 0;
 }
 #top a {
-	padding: 8px 16px;
-	color: #000;
-	font-weight: bold;
+  padding: 8px 16px;
+  color: #000;
+  font-weight: bold;
 }
 dl {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 dt, dd {
-	display: none;
-	position: absolute;
-	height: 100%;
-	width: 90%;
-	text-align: center;
-	font-size: 32px;
-	padding: 20% 5% 0;
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 90%;
+  text-align: center;
+  font-size: 32px;
+  padding: 20% 5% 0;
 }
 
 dt.touch, dd.touch, 
 #top a.touch, #shuffle.touch,
 #top a:hover, #shuffle:hover  {
-	background: #dedede;
+  background: #dedede;
 }
 #bottom {
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	overflow: hidden;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  overflow: hidden;
 }
 #prev, #next {
-	background: #897ed8;
-	color: #fff;
-	font-weight: bold;
+  background: #897ed8;
+  color: #fff;
+  font-weight: bold;
 }
 #prev.touch, #next.touch,
 #prev:hover, #next:hover {
-	background: #6e66b3;
+  background: #6e66b3;
 }
 #prev, #next, #shuffle {
-	float: left;
-	padding: 16px 5%;
-	width: 20%;
-	text-align: center;
+  float: left;
+  padding: 16px 5%;
+  width: 20%;
+  text-align: center;
 }
 #shuffle {
-	padding: 16px 10%;
+  padding: 16px 10%;
 }
 
 #remove {
-	z-index: 1;
-	background: #c0002a;
-	color: #fff;
-	font-weight: bold;
-	font-size: 32px;
-	position: absolute;
-	top: 0;
-	padding: 4px 8px;
+  z-index: 1;
+  background: #c0002a;
+  color: #fff;
+  font-weight: bold;
+  font-size: 32px;
+  position: absolute;
+  top: 0;
+  padding: 4px 8px;
 }
 #remove.touch, #remove:hover {
-	background: #8f0320;
+  background: #8f0320;
 }
 
 #footer {
@@ -152,54 +152,54 @@ dt.touch, dd.touch,
     font-size: 16px;
 }
 #footer a {
-	color: #6e66b3;
-	padding: 8px;
-	-webkit-border-radius: 8px
+  color: #6e66b3;
+  padding: 8px;
+  -webkit-border-radius: 8px
 }
 
 #error {
-	font-size: 20px;
-	background: #c0002a;
-	color: #fff;
-	padding: 16px 5%;
-	font-weight: bold;
+  font-size: 20px;
+  background: #c0002a;
+  color: #fff;
+  padding: 16px 5%;
+  font-weight: bold;
 }
 
 a#new {
-	display: block;
-	text-align: center;
-	font-size: 20px;
-	padding: 16px;
-	border-bottom: 1px solid #ccc;
-	font-weight: bold;
-	color: #6e66b3;
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  padding: 16px;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  color: #6e66b3;
 }
 a#new.touch, a#new:hover,
 ol#sets li a.touch, ol#sets li a.touch span,
 ol#sets li a:hover, ol#sets li a:hover span,
 #footer a.touch, #footer a:hover {
-	color: #fff;
-	background: #6e66b3;
+  color: #fff;
+  background: #6e66b3;
 }
 ol#sets li a {
-	display: block;
-	overflow: hidden;
-	white-space: nowrap;
-	padding: 8px;
-	border-bottom: 1px solid #ccc;
-	color: #000;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
 }
 ol#sets h2 {
-	font-size: 20px;
-	font-weight: bold;
-	line-height: 1.5;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
 }
 ol#sets span {
-	font-size: 16px;
-	line-height: 1.5;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: block;
-	width: 100%;
-	color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  color: #666;
 }
