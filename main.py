@@ -191,7 +191,8 @@ class Manifest(BasePage):
 application = webapp2.WSGIApplication([('/', ListSets),
                                         ('/new', NewSet),
                                         ('/set/(\d+)', ViewSet),
-                                        ('/edit/(\d+)', EditSet)],
+                                        ('/edit/(\d+)', EditSet),
+					('/cache.manifest', Manifest)],
                                        debug=True)
 
 if __name__ == '__main__':
