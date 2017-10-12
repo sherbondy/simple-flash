@@ -1,6 +1,6 @@
 # Simple Flash
 
-[See the app live](http://simple-flash.appspot.com)
+[See the app live](http://simple-flash-hrd.appspot.com)
 
 A simple flashcard web application for studying vocabulary words, intended for deployment on [Google App Engine](https://appengine.google.com).
 
